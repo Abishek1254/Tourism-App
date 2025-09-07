@@ -28,6 +28,11 @@ if (process.env.NODE_ENV === 'development') {
 
 // Routes
 app.use('/api/auth', require('./routes/auth'));
+app.use('/api/destinations', require('./routes/destinations'));
+// Add this line with your other routes
+app.use('/api/profile', require('./routes/profile'));
+
+
 
 // Health check route
 app.get('/api/health', (req, res) => {
@@ -51,9 +56,9 @@ app.use((error, req, res, next) => {
 });
 
 // Start server
-const PORT=3000;
+const PORT= 3000;
 app.listen(PORT, () => {
-  console.log(`Server running`);
+  console.log(`Server running successfuly`);
 });
 
 // Handle unhandled promise rejections

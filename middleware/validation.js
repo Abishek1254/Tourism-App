@@ -24,7 +24,7 @@ const registerValidation = [
   
   body('role')
     .optional()
-    .isIn(['tourist', 'guide', 'vendor'])
+    .isIn(['tourist', 'guide', 'vendor','admin'])
     .withMessage('Invalid role specified')
 ];
 

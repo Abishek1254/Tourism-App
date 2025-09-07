@@ -178,8 +178,150 @@ const userSchema = new mongoose.Schema({
   isActive: {
     type: Boolean,
     default: true
+  },
+  // Add these enhanced preference fields to your existing User schema
+
+// Tourism-specific preferences
+tourismPreferences: {
+  // Travel behavior
+  preferredTravelTime: {
+    duration: {
+      type: String,
+      enum: ['weekend', '2-3days', 'week', '2weeks', 'month'],
+      default: 'weekend'
+    },
+    seasons: [{
+      type: String,
+      enum: ['winter', 'summer', 'monsoon', 'post-monsoon']
+    }],
+    timeOfDay: [{
+      type: String,
+      enum: ['early-morning', 'morning', 'afternoon', 'evening', 'night']
+    }]
+  },
+  
+  // Interest-based preferences
+  interests: {
+    primary: [{
+      type: String,
+      enum: [
+        'adventure-sports', 'cultural-heritage', 'nature-wildlife', 
+        'religious-spiritual', 'tribal-culture', 'food-cuisine',
+        'photography', 'trekking', 'waterfalls', 'caves',
+        'historical-sites', 'festivals', 'handicrafts', 'meditation'
+      ]
+    }],
+    secondary: [String],
+    avoid: [String] // Things user wants to avoid
+  },
+  
+  // Experience preferences
+  experienceLevel: {
+    adventure: {
+      type: String,
+      enum: ['beginner', 'intermediate', 'advanced'],
+      default: 'beginner'
+    },
+    cultural: {
+      type: String,
+      enum: ['surface', 'moderate', 'deep-dive'],
+      default: 'moderate'
+    }
+  },
+  
+  // Budget and spending
+  budgetPreferences: {
+    dailyBudget: {
+      min: Number,
+      max: Number,
+      currency: { type: String, default: 'INR' }
+    },
+    spendingStyle: {
+      type: String,
+      enum: ['budget', 'mid-range', 'luxury', 'mixed'],
+      default: 'mid-range'
+    },
+    prioritySpending: [{
+      type: String,
+      enum: ['accommodation', 'food', 'activities', 'transport', 'shopping']
+    }]
+  },
+  
+  // Accessibility and comfort
+  accessibility: {
+    mobilityRequirements: {
+      wheelchairAccess: Boolean,
+      limitedMobility: Boolean,
+      walkingDifficulty: Boolean
+    },
+    dietaryRestrictions: [{
+      type: String,
+      enum: ['vegetarian', 'vegan', 'jain', 'halal', 'no-beef', 'no-pork', 'gluten-free']
+    }],
+    languagePreference: [{
+      type: String,
+      enum: ['english', 'hindi', 'odia', 'santhali', 'mundari', 'kurukh', 'kharia', 'ho']
+    }]
+  },
+  
+  // Social preferences
+  socialPreferences: {
+    groupSize: {
+      type: String,
+      enum: ['solo', 'couple', 'small-group', 'large-group'],
+      default: 'solo'
+    },
+    guidedVsIndependent: {
+      type: String,
+      enum: ['guided-only', 'mixed', 'independent-only'],
+      default: 'mixed'
+    },
+    interactionLevel: {
+      type: String,
+      enum: ['minimal', 'moderate', 'high'],
+      default: 'moderate'
+    }
   }
-}, {
+},
+
+// User activity tracking
+activityTracking: {
+  visitedDestinations: [{
+    destinationId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Destination'
+    },
+    visitDate: Date,
+    rating: {
+      type: Number,
+      min: 1,
+      max: 5
+    },
+    review: String,
+    photos: [String]
+  }],
+  
+  searchHistory: [{
+    query: String,
+    filters: mongoose.Schema.Types.Mixed,
+    timestamp: { type: Date, default: Date.now }
+  }],
+  
+  bookingHistory: [{
+    type: {
+      type: String,
+      enum: ['accommodation', 'guide', 'activity', 'transport']
+    },
+    bookingId: mongoose.Schema.Types.ObjectId,
+    date: Date,
+    status: String
+  }]
+}
+
+}, 
+
+
+{
   timestamps: true,
   toJSON: { virtuals: true },
   toObject: { virtuals: true }
