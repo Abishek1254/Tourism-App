@@ -33,6 +33,11 @@ app.use('/api/destinations', require('./routes/destinations'));
 app.use('/api/profile', require('./routes/profile'));
 
 
+// Add this line with your existing routes
+app.use('/api/itinerary', require('./routes/itinerary'));
+
+
+
 
 // Health check route
 app.get('/api/health', (req, res) => {

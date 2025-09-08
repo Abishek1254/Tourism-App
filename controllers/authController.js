@@ -6,7 +6,6 @@ const config = require('../config/config.js');
 const register = async (req, res) => {
   try {
     const { name, email, phone, password, role } = req.body;
-     console.log("HELLOOO");
     
     // Check if user already exists
     const existingUser = await User.findOne({
@@ -132,8 +131,8 @@ const login = async (req, res) => {
         token
       }
     });
-    
-  } catch (error) {
+  } 
+  catch (error) {
     console.error('Login error:', error);
     res.status(500).json({
       success: false,
