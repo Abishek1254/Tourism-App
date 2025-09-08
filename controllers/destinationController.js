@@ -95,7 +95,8 @@ const getNearbyDestinations = async (req, res) => {
       data: { destinations }
     });
 
-  } catch (error) {
+  } 
+  catch (error) {
     console.error('Get nearby destinations error:', error);
     res.status(500).json({
       success: false,
@@ -126,7 +127,8 @@ const getDestination = async (req, res) => {
       data: { destination }
     });
 
-  } catch (error) {
+  } 
+  catch (error) {
     console.error('Get destination error:', error);
     res.status(500).json({
       success: false,
@@ -151,7 +153,8 @@ const createDestination = async (req, res) => {
       data: { destination }
     });
 
-  } catch (error) {
+  } 
+  catch (error) {
     console.error('Create destination error:', error);
     
     if (error.name === 'ValidationError') {

@@ -17,7 +17,8 @@ class GeminiService {
       const result = await this.generateWithGemini(prompt);
       
       return this.parseAIResponse(result);
-    } catch (error) {
+    }
+     catch (error) {
       console.error('Gemini AI Service Error:', error);
       throw new Error('Failed to generate itinerary: ' + error.message);
     }

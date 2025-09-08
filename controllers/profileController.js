@@ -222,7 +222,8 @@ const getPersonalizedRecommendations = async (req, res) => {
       }
     });
 
-  } catch (error) {
+  } 
+  catch (error) {
     console.error('Get recommendations error:', error);
     res.status(500).json({
       success: false,

@@ -59,8 +59,8 @@ const protect = async (req, res, next) => {
     // Add user to request object
     req.user = user;
     next();
-    
   } 
+  
   catch (error) {
     console.error('Auth middleware error:', error);
     console.log("Generated token:", token);
