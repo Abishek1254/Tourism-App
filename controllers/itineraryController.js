@@ -248,7 +248,7 @@ const getUserItineraries = async (req, res) => {
       .limit(parseInt(limit))
       .skip(skip)
       .populate('userId', 'name email')
-      .select('title description tripDetails budget status analytics createdAt aiGeneration.generatedBy aiGeneration.aiProvider version');
+      .select('title description tripDetails budget status analytics createdAt aiGeneration.generatedBy aiGeneration.aiProvider version days'); // Added 'days'
 
     const total = await Itinerary.countDocuments(filter);
 
@@ -312,8 +312,7 @@ const getItinerary = async (req, res) => {
       }
     });
 
-  } 
-  catch (error) {
+  } catch (error) {
     console.error('Get itinerary error:', error);
     
     if (error.name === 'CastError') {
